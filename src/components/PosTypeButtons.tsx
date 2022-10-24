@@ -6,10 +6,10 @@ export default function PosTypeButtons({ checkIfRight }: Props) {
   const swiper = useSwiper();
   return (
     <section className='flex gap-4 fixed font-semibold text-2xl rounded-lg bottom-[30px] z-50 w-full '>
-      <div className='w-[80%] mx-auto bg-dark-shade-gray p-5 rounded-md  flex justify-evenly'>
+      <div className='w-[80%] mx-auto bg-dark-shade-gray p-5 rounded-md flex flex-col gap-4 lg:gap-0 lg:flex-row  justify-evenly'>
         {['noun', 'adverb', 'adjective', 'verb'].map((pos) => (
           <button
-            className='cursor-pointer capitalize relative px-12 py-10  rounded-lg bg-dark-shade-gray-high shadow-xl hover:-translate-y-2 hover:bg-white hover:text-black transition-all '
+            className='cursor-pointer capitalize  relative px-12 py-4 lg:py-10  rounded-lg bg-dark-shade-gray-high shadow-xl hover:-translate-y-2 hover:bg-white hover:text-black transition-all '
             onClick={() => {
               checkIfRight(swiper.realIndex, pos);
               swiper.slideNext();

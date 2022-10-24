@@ -13,7 +13,7 @@ export default function UserRanking({ results, resetGame }: Props) {
   return (
     <motion.div
       key='modal'
-      className='w-[35%] rounded-md bg-dark-shade-gray grid place-items-center h-[500px] p-7 '
+      className='w-[85%] max-w-[35rem] rounded-md bg-dark-shade-gray grid place-items-center h-[500px] p-7 '
     >
       {rank === null ? (
         <>
