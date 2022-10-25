@@ -1,0 +1,39 @@
+shape of words array 
+{id : number , pos:string , word:string}[]
+shape of results array
+boolean[]
+
+
+Program Flow 
+A-User opens the application
+words being fetched?
+fetched ? 
+	render the game component
+still fetching ? 
+	render the loading spinner
+B-game component render 
+	1- <PosTypeButtons checkIfRight={checkIfRight} />
+		- user clicks on the Pos type of the word
+		- the only component capable of sliding the carousel and returns a feedback (the index of the passed slide , the POS of the clicked button) 
+       	  through checkIfRight provided by useResults Hook   
+		- checkIfRight checks the index against the words array (which is provided to it by useGetRandomWords() hook) gets its POS attribute compares it with the POS of the clicked button
+		- after checkIfRight returns either true or false a state change takes place adding to results array the return value of checkIfRight()
+  
+     2- <ProgressBar results={results} wordsLength={words.length} /> 
+		- combines both the capabilites of rendering the progress and results state of his choices in one go
+		- sets the width of the progress bar based on the length of the results array which changes based on state change / the length of the words array * 100
+		- the progress bar is a grid and the methodolgy of rendering is as follows 
+			- number of columns increases based on the length of the array so if the width is 3 out of N  then the columns are 3 at this snapshot of time
+			  Note : (client is soft codded for more than 10 items however the server is not but can be modified to accept a query paramater and fetches more than 10 values based on the client needs )
+			- every result element takes up on column of space columns in grid starts from 1 not 0 so every element has to start from index + 1 and ends at index + 2 
+			- if true color is green if false color is red
+
+	3- <Modal isOpen={words.length === results.length}> </Modal> 
+	    - just dummy Wrapper component that knows when to open and close based on a boolean value
+	    - only renders when the user finishes answering the questions hence (words.length === results.length)
+	    - theoretically (words.length === results.length) 0 === 0 could happen however this is avoided by (A) in the flow  
+
+	4- <UserRanking resetGame={resetGame} results={results} />
+	    - when mounted loading spinner renders until the ranking calculation is returned
+	    - only then the try again button and the results appear 
+	    - if the user clicks try again resetGame is triggerd to clear words / results / and refetches more words which loops back to (A)
