@@ -1,16 +1,17 @@
-import { useGetRandomWords, useResults } from './hooks';
+import { getRandomWords } from './api';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import UserRanking from './components/UserRanking';
+import { useGetRandomWords, useResults } from './hooks';
 import LoadingSpinner from './components/LoadingSpinner';
 import PosTypeButtons from './components/PosTypeButtons';
+import UserRanking from './components/UserRanking';
 import ProgressBar from './components/ProgressBar';
 import Modal from './components/Modal';
 import 'swiper/css';
-import { getRandomWords } from './api';
 
 export default function App() {
   const [words, setWords, refetchWords] = useGetRandomWords(getRandomWords);
   const [results, setResults, checkIfRight] = useResults(words);
+
   const resetGame = () => {
     setWords([]);
     setResults([]);
